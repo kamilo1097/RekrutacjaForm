@@ -1,14 +1,16 @@
 const mainMethodExecuter = () => {
   let submitBtn = getDocumentElement("#btn");
+  let dobInput = getDocumentElement("#dobInput");
   let personalIdNumber = getDocumentElement("#peselInput");
-  personalIdNumber.addEventListener("keyup", DOBBuilder);
+  personalIdNumber.addEventListener("keyup", (e) => {
+    DOBBuilder(e, dobInput);
+  });
   submitBtn.addEventListener("click", (e) => {
     validate();
   });
 };
-const DOBBuilder = (e) => {
+const DOBBuilder = (e, dobInput) => {
   let personalIdNumberInput = e.target.value;
-  let dobInput = getDocumentElement("#dobInput");
   let fullYearOfBirth = "yyyy";
   let monthNumber = "mm";
   let dayNumber = "dd";
@@ -59,7 +61,7 @@ const validate = () => {
   }
 
   const personBuilder = {
-    key: Math.random(1) * 10000,
+    key: Math.random(1) * 1000,
     person: {
       firstName: firstName,
       lastName: lastName,
