@@ -1,0 +1,91 @@
+/*
+Notatki w dokumencie google
+*/
+body {
+  display: flex;
+  background-color: cornsilk;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+.mainContainer {
+  max-width: 700px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+form > button {
+  width: fit-content;
+  justify-self: center;
+}
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+}
+.inputContainer > div {
+  width: 50%;
+}
+.inputContainer > div:first-child {
+  margin-right: 10px;
+}
+.inputContainer > div:first-child > p {
+  text-align: right;
+}
+#dobInput {
+  background-color: beige;
+  border: 0;
+}
+#btn {
+  background-color: azure;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+/*MODAL*/
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+/*ENDMODAL*/
