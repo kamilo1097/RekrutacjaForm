@@ -55,7 +55,7 @@ const validate = () => {
   }
 
   const personBuilder = {
-    key: Math.random(100),
+    key: Math.random(1) * 10000,
     person: {
       firstName: firstName,
       lastName: lastName,
