@@ -41,8 +41,18 @@ form > button {
 .inputContainer > div:first-child > p {
   text-align: right;
 }
+input {
+  background-color: transparent;
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: rgb(53, 53, 58);
+  transition: 0.5s;
+}
+input:focus {
+  border-color: green;
+}
 #dobInput {
-  background-color: beige;
+  background-color: transparent;
   border: 0;
 }
 #btn {
