@@ -1,45 +1,49 @@
 const mainMethodExecuter = () => {
-  let submitBtn = document.querySelector("#btn");
-  let personalIdNumber = document.querySelector("#peselInput");
-  personalIdNumber.addEventListener("keyup", dobUpdate);
+  let submitBtn = getDocumentElement("#btn");
+  let personalIdNumber = getDocumentElement("#peselInput");
+  personalIdNumber.addEventListener("keyup", DOBBuilder);
   submitBtn.addEventListener("click", (e) => {
     validate();
   });
 };
-const dobUpdate = (e) => {
-  let dobInput = document.querySelector("#dobInput");
+const DOBBuilder = (e) => {
+  let personalIdNumberInput = e.target.value;
+  let dobInput = getDocumentElement("#dobInput");
   let fullYearOfBirth = "yyyy";
   let monthNumber = "mm";
   let dayNumber = "dd";
-  let personalIdNumberInput = e.target.value;
+
   if (personalIdNumberInput.length > 1) {
-    let yearNumber = personalIdNumberInput.substring(0, 2).padStart(2, "0");
+    let yearNumber = subStringEachSectionInId(personalIdNumberInput, 0, 2);
     fullYearOfBirth = getFullYearOfPerson(yearNumber);
     if (personalIdNumberInput.length > 3) {
-      monthNumber = personalIdNumberInput.substring(2, 4).padStart(2, "0");
+      monthNumber = subStringEachSectionInId(personalIdNumberInput, 2, 4);
       if (personalIdNumberInput.length > 5) {
-        dayNumber = personalIdNumberInput.substring(4, 6).padStart(2, "0");
+        dayNumber = subStringEachSectionInId(personalIdNumberInput, 4, 6);
       }
     }
     dobInput.value = fullYearOfBirth + "-" + monthNumber + "-" + dayNumber;
   }
 };
+const subStringEachSectionInId = (number, start, stop) => {
+  return number.substring(start, stop).padStart(2, "0");
+};
 
-const getFullYearOfPerson = (yearNumber) => {
+const getFullYearOfPerson = (trimmedYearNumber) => {
   const currentYearLast2Number = new Date()
     .getFullYear()
     .toString()
     .substring(2, 4);
-  return yearNumber > currentYearLast2Number
-    ? "19" + yearNumber
-    : "20" + yearNumber;
+  return trimmedYearNumber > currentYearLast2Number
+    ? "19" + trimmedYearNumber
+    : "20" + trimmedYearNumber;
 };
 
 const validate = () => {
   let regName = /^[a-zA-Z]+$/;
-  let firstName = document.querySelector("#nameInput").value;
-  let lastName = document.querySelector("#lastNameInput").value;
-  let personalIdNumber = document.querySelector("#peselInput").value;
+  let firstName = getDocumentElement("#nameInput").value;
+  let lastName = getDocumentElement("#lastNameInput").value;
+  let personalIdNumber = getDocumentElement("#peselInput").value;
 
   if (!regName.test(firstName) || firstName.length > 20) {
     showCloseModal("Proszę podać prawidłowe imię");
@@ -60,9 +64,12 @@ const validate = () => {
       firstName: firstName,
       lastName: lastName,
       personalIdNumber: personalIdNumber,
-      DOB: getDOB(),
+      DOB: getDocumentElement("#dobInput").value,
     },
   };
+  saveInLocalStorage(personBuilder);
+};
+const saveInLocalStorage = (personBuilder) => {
   try {
     localStorage.setItem(
       personBuilder.key,
@@ -72,10 +79,7 @@ const validate = () => {
   } catch (err) {
     alert("Ups coś poszło nie tak");
   }
-
-  return true;
 };
-
 const isValidPesel = (pesel) => {
   if (typeof pesel !== "string") return false;
 
@@ -91,8 +95,8 @@ const isValidPesel = (pesel) => {
 };
 
 const showCloseModal = (textInModal) => {
-  let modal = document.querySelector("#myModal");
-  let close = document.querySelector(".close");
+  let modal = getDocumentElement("#myModal");
+  let close = getDocumentElement(".close");
   let textInsideModal = modal.querySelector(".textInsideModal");
   textInsideModal.innerText = textInModal;
   modal.style.display = "block";
@@ -100,8 +104,8 @@ const showCloseModal = (textInModal) => {
     modal.style.display = "none";
   });
 };
-const getDOB = () => {
-  return document.querySelector("#dobInput").value;
-};
 
+const getDocumentElement = (element) => {
+  return document.querySelector(element);
+};
 mainMethodExecuter();
