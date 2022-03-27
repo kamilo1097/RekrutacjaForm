@@ -53,8 +53,8 @@ const validate = () => {
     showCloseModal("Proszę podać prawidłowy pesel");
     return false;
   }
-  alert("Pomyślnie zapisano");
-  const objectBuilder = {
+
+  const personBuilder = {
     key: Math.random(100),
     person: {
       firstName: firstName,
@@ -63,9 +63,19 @@ const validate = () => {
       DOB: getDOB(),
     },
   };
-  localStorage.setItem(objectBuilder.key, JSON.stringify(objectBuilder.person));
+  try {
+    localStorage.setItem(
+      personBuilder.key,
+      JSON.stringify(personBuilder.person)
+    );
+    alert("Pomyślnie zapisano");
+  } catch (err) {
+    alert("Ups coś poszło nie tak");
+  }
+
   return true;
 };
+
 const isValidPesel = (pesel) => {
   if (typeof pesel !== "string") return false;
 
@@ -79,6 +89,7 @@ const isValidPesel = (pesel) => {
   sum = sum % 10;
   return (10 - sum) % 10 === controlNumber;
 };
+
 const showCloseModal = (textInModal) => {
   let modal = document.querySelector("#myModal");
   let close = document.querySelector(".close");
