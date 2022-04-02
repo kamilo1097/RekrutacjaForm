@@ -14,7 +14,7 @@ export class MainMethodExecuter {
     this.personalIdNumber.addEventListener("keyup", (e) => {
       this.builder.DOBBuilder(e, this.dobInput);
     });
-    this.submitBtn.addEventListener("click", (e) => {
+    this.submitBtn.addEventListener("click", () => {
       this.validate.validate();
     });
   };
